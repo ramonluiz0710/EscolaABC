@@ -9,7 +9,7 @@ public class ConnectDB {
 	
 	private static final String URL = "jdbc:postgresql://localhost:5433/escolaabc";
 	private static final String USER = "postgres";
-	private static final String password = "071005";
+	private static final String password = "***";
 	
 	public static Connection getConnection() {
 		try{
