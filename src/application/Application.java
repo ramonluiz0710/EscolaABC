@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import database.AlunoDAO;
 import entities.Aluno;
 
 public class Application {
@@ -11,21 +12,20 @@ public class Application {
 	public static void main(String[] args) {
 	
 		Scanner sc = new Scanner(System.in);
-		
-		String nome = null;
-		int idade = 0;
-		double notaFinal = 0;
 		int opcao = 0;
-		double maiorNota = 0;
-		Aluno alunoMaiorNota = null;
-		boolean erro = false;
-		var alunos = new ArrayList<Aluno>();
+		Aluno aluno = new Aluno();
 		
-		while(opcao != 4) {
+		
+		while(opcao != 8) {
 			System.out.println("Selecione uma opçao:");
 			System.out.println("1 - Cadastrar novo aluno:");
 			System.out.println("2 - Listar todos os alunos cadastrados:");
-			System.out.println("3 - Exibir aluno com maior nota:");
+			System.out.println("3 - Inserir/mudar primeira nota:");
+			System.out.println("4 - Inserir/mudar segunda nota:");
+			System.out.println("5 - Inserir/mudar terceira nota:");
+			System.out.println("6 - Remover aluno: ");
+			System.out.println("7 - Aluno com maior nota:");
+			System.out.println("8 - Sair ");
 			System.out.println();
 			System.out.print("Digite aqui: ");
 			
@@ -40,78 +40,28 @@ public class Application {
 			
 			switch(opcao) {
 			case 1:
-				sc.nextLine();
-				System.out.print("Digite o nome do aluno: ");
-				nome = sc.nextLine();
-				System.out.println();
+				aluno.registraAluno();
 				
-				do {
-					try {
-						System.out.print("Digite a idade do aluno: ");
-						idade = sc.nextInt();
-						System.out.println();
-						sc.nextLine();
-						
-						if(idade <= 0) {
-							System.out.println("Idade invalida!");
-							System.out.println();
-							erro = true;
-						}else {
-							erro = false;
-						}
-						
-					}catch(InputMismatchException e){
-						sc.next();
-						System.out.println("Isso não é uma idade!");
-						System.out.println();
-						erro = true;
-					}
-				}while(erro);
-				
-				do {
-					try {
-						System.out.println("Digite a nota final do aluno: ");
-						notaFinal = sc.nextDouble();
-						System.out.println();
-						sc.nextLine();
-						
-						if(notaFinal < 0 || notaFinal > 10) {
-							System.out.println("Digite uma nota valida!");
-							System.out.println();
-							erro = true;
-						}else {
-							erro = false;
-						}
-					}catch(InputMismatchException e) {
-						sc.next();
-						System.out.println("Isso não é uma nota valida!");
-						System.out.println();
-						erro = true;
-					}
-					
-				}while(erro);
-				
-				alunos.add(new Aluno(nome, idade, notaFinal));
 				break;
 			case 2:
-				for(Aluno i : alunos) {
-					System.out.println(i);
-					System.out.println();
-				}
+				aluno.listarAlunos();
 				break;
 			case 3:
-				for(Aluno i : alunos) {
-					if(i.getNotaFinal() > maiorNota) {
-						maiorNota = i.getNotaFinal();
-						alunoMaiorNota = i;
-					}
-				}
-				
-				System.out.println("Aluno com maior nota: ");
-				System.out.println(alunoMaiorNota);
-				System.out.println();
+				aluno.mudarNota1();
 				break;
 			case 4:
+				aluno.mudarNota2();
+				break;
+			case 5:
+				aluno.mudarNota3();
+				break;
+			case 6:
+				aluno.removerAluno();
+				break;
+			case 7:
+				aluno.maiorNota();
+				break;
+			case 8:
 				System.out.println("Saindo...");
 				System.out.println();
 				break;
@@ -121,6 +71,8 @@ public class Application {
 				break;
 			}
 		}
+		
+		System.out.println("Obrigado por usar nosso sistema!");
 
 	}
 
