@@ -1,5 +1,4 @@
-*Cadastro aluno escola ABC
+#Cadastro aluno escola ABC
 
-Criei esse projeto básico de cadastro de alunos para uma escola em java.
-
-Apenas com o intuito de colocar em prática alguns conteudos aprendidos anteriormente.
+Projeto de java + postgresql com ajuda do JDBC.
+Pude absorver muito do que o JDBC faz e do poder que ele tem em projetos.
